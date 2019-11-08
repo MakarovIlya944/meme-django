@@ -1,0 +1,5 @@
+.vscode/**
+venv/**
+meme/meme/__pycache__/**
+meme/memeApp/__pycache__/**
+meme/memeApp/migration/**
