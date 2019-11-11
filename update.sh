@@ -5,6 +5,6 @@ echo 'Building';
 docker build --force-rm -t meme ./meme-django;
 
 echo 'Runing';
-docker run --rm -v db.sqlite3:/app/db.sqlite3 -p 8080:8000 meme;
+docker run --rm -it -v `pwd`/db.sqlite3:/app/db.sqlite3 -p 8080:8000 meme;
 
 echo 'Updated';
