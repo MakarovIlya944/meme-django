@@ -1,10 +1,10 @@
 echo 'Start updating';
-cp db.sqlite3 ./dumps/db.sqlite3;
+cp ../db.sqlite3 ../dumps/db.sqlite3;
 
 echo 'Building';
-docker build --force-rm -t meme ./meme-django;
+docker build --force-rm --no-cache -t meme .;
 
 echo 'Runing';
-docker run --rm -it -v `pwd`/db.sqlite3:/app/db.sqlite3 -p 8080:8000 meme;
+docker run --rm -it -v `pwd`/../db.sqlite3:/app/db.sqlite3 -p 8080:8000 meme;
 
 echo 'Updated';
