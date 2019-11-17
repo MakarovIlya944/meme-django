@@ -1,6 +1,5 @@
 .vscode/**
 venv/**
-meme/meme/__pycache__/**
-meme/memer/__pycache__/**
+meme/**/__pycache__/**
 meme/memer/migration/**
 meme/*.sqlite3
