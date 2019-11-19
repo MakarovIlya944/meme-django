@@ -15,12 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from memer import views as mem_v
 from default import views as def_v
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('memer/', mem_v.index),
     path(r'alias/', include('alias.urls')),
-    path('', def_v.sindex),
+    path('', def_v.index)
 ]
