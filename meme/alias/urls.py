@@ -17,5 +17,5 @@ from django.urls import path
 from alias import views
 
 urlpatterns = [
-    path('index', views.index),
+    path('', views.index),
 ]
