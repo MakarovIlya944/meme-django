@@ -1,5 +1,9 @@
 from django import forms
+from default import models
 
-class Loginform(forms.Form):
-    username = forms.CharField(max_length=25, label="Enter username")
-    password = forms.CharField(max_length=30, label='Password', widget=forms.PasswordInput)
+class Signupform(forms.ModelForm):
+    password = forms.CharField(label='Password', widget=forms.PasswordInput)
+    
+    class Meta:
+        model= models.Siteuser
+        fields= ["username", "password"]

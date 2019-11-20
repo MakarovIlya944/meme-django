@@ -12,7 +12,15 @@
 
 <body>
     <h1 style="text-align: center;">Как тебя величать</h1>
-    <form>
+    <form action="" method="POST">
+            {% csrf_token %}
+            {% if error %}
+            {{ error }}
+            {% endif %}
+            {{ form.as_p }}
+            <input type="submit" name="submit" value="Sign up"/>
+    </form>
+    <!-- <form action="" method="POST">
         <div class="form-group">
             <label for="inputLogin">Придумай себе логин</label>
             <input type="text" class="form-control" id="inputLogin" aria-describedby="inputHelp"
@@ -24,7 +32,7 @@
             <input type="password" class="form-control" id="inputPassword" placeholder="Введи пароль">
         </div>
         <button type="submit" class="btn btn-primary">Создать</button>
-    </form>
+    </form> -->
 </body>
 
 </html>
