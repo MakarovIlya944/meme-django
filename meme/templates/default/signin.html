@@ -11,19 +11,23 @@
 </head>
 
 <body>
-    <form>
+    <form action="" method="POST">
         <div class="form-group">
-            <label for="username">Введи логин, яхонтовый мой</label>
-            <input type="text" class="form-control" id="username" aria-describedby="inputHelp"
+            {% csrf_token %}
+            <label for="id_username">Введи логин, яхонтовый мой</label>
+            <input type="text" class="form-control" name="username" id="id_username" aria-describedby="inputHelp"
                 placeholder="Сюда логин">
             <small id="inputHelp" class="form-text text-muted">Не забыл логин то?</small>
+            <label for="id_password">Пароль давай</label>
+            <input type="password" class="form-control" name="password" id="id_password" placeholder="Сюда пароль">
         </div>
-        <div class="form-group">
-            <label for="password">Пароль давай</label>
-            <input type="password" class="form-control" id="password" placeholder="Сюда пароль">
-        </div>
-        <button type="submit" class="btn btn-primary">Создать</button>
+        <button type="submit" name="submit" class="btn btn-primary">Создать</button>
     </form>
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endif %}
 </body>
 
 </html>

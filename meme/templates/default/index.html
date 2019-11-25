@@ -13,19 +13,29 @@
 </head>
 
 <body>
-    <h1 style="text-align: center;">Здарова бывалый.</h1>
-    <h2 style="text-align: center;">Приветствую тебя на meme games</h2>
-
-    <div class="row justify-content-center">
-        <div class="card">
-            <div class="card-body">
-                <h3>Выбери игру.</h3>
+    <h1 style="text-align: center;">Здарова бывалый</h1>
+    <h2 style="text-align: center;">Приветствую тебя
+        {% if user %}
+        {{ user }}
+        {% else %}
+        <p>странник</p>
+        {% endif %}</h2>
+    <div class="container">
+        <div class="row justify-content-right">
+                <h3 style="text-align: right;">право</h3>
+        </div>
+        <div class="row justify-content-center">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Выбери игру.</h3>
+                </div>
             </div>
         </div>
     </div>
     <div class="container">
         <div class="row justify-content-center">
-        <a href="/alias"> <button type="button" id="alias-btn" class="btn btn-outline-primary btn-lg">Alias</button></a>
+            <a href="/alias"> <button type="button" id="alias-btn"
+                    class="btn btn-outline-primary btn-lg">Alias</button></a>
         </div>
         <div class="row justify-content-center">
             <button type="button" class="btn btn-outline-secondary btn-lg">Memer</button>

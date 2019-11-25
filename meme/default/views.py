@@ -11,9 +11,9 @@ def signup(request):
     uservalue=''
     passwordvalue=''
 
-    form= forms.Signupform(request.POST or None)
+    form = forms.Signupform(request.POST or None)
     if form.is_valid():
-        fs= form.save(commit=False)
+        fs = form.save(commit=False)
         uservalue = form.cleaned_data.get("username")
         passwordvalue = form.cleaned_data.get("password")
         try:
@@ -28,7 +28,7 @@ def signup(request):
             fs.user= request.user
             fs.save()
             context= {'form': form}
-            return render(request, 'default/signup.html', context)
+            return render(request, 'default/index.html', context)
     else:
         context= {'form': form}
         return render(request, 'default/signup.html', context)
@@ -38,7 +38,7 @@ def signin(request):
     uservalue=''
     passwordvalue=''
 
-    form= forms.Loginform(request.POST or None)
+    form = forms.Signupform(request.POST or None)
     if form.is_valid():
         uservalue= form.cleaned_data.get("username")
         passwordvalue= form.cleaned_data.get("password")
@@ -47,9 +47,9 @@ def signin(request):
         if user is not None:
             login(request, user)
             context= {'form': form,
-                      'error': 'The login has been successful'}
+                      'user': uservalue}
             
-            return render(request, 'default/signin.html', context)
+            return render(request, 'default/index.html', context)
         else:
             context= {'form': form,
                       'error': 'The username and password combination is incorrect'}
