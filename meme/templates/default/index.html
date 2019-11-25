@@ -13,21 +13,23 @@
 </head>
 
 <body>
-    <h1 style="text-align: center;">Здарова бывалый</h1>
     <h2 style="text-align: center;">Приветствую тебя
         {% if user %}
         {{ user }}
         {% else %}
         <p>странник</p>
         {% endif %}</h2>
+
     <div class="container">
-        <div class="row justify-content-right">
-                <h3 style="text-align: right;">право</h3>
-        </div>
         <div class="row justify-content-center">
-            <div class="card">
-                <div class="card-body">
-                    <h3>Выбери игру.</h3>
+            <div class="col-4"></div>
+            <div class="col-4">
+                <h3 style="text-align: center;">Выбери игру</h3>
+            </div>
+            <div class="col-4">
+                <div class="btn-group-vertical" role="group" aria-label="...">
+                        <a href="/signin" class="btn btn-primary btn-sm" role="button">Войти</a>
+                        <a href="/signup" class="btn btn-primary btn-sm" role="button">Зарегистрироваться</a>
                 </div>
             </div>
         </div>
