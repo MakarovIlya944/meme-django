@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 
@@ -23,7 +23,8 @@ def signup(request):
             user.save()
             login(request, user)
             context = {'form': form}
-            return render(request, 'default/index.html', context)
+            return redirect('/')
+            # return render(request, 'default/index.html', context)
     else:
         context = {'form': form}
         return render(request, 'default/signup.html', context)
@@ -39,7 +40,8 @@ def signin(request):
         if user is not None:
             login(request, user)
             context = {'form': form}
-            return render(request, 'default/index.html', context)
+            # return render(request, 'default/index.html', context)
+            return redirect('/')
         else:
             context = {'form': form,
                        'error': 'The username and password combination is incorrect'}
