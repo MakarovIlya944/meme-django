@@ -40,7 +40,6 @@ def signin(request):
         if user is not None:
             login(request, user)
             context = {'form': form}
-            # return render(request, 'default/index.html', context)
             return redirect('/')
         else:
             context = {'form': form,

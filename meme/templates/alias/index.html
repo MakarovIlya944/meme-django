@@ -3,13 +3,12 @@
 
 <head>
   {% load static %}
-  <script src="{% static "js/default.js" %}"></script>
+  <script src="{% static "js/client.js" %}"></script>
   {% load bootstrap4 %}
   <script src="{% bootstrap_jquery_url %}"></script>
   {% bootstrap_javascript %}
   {% bootstrap_css %}
   <meta charset="utf-8" />
-  <script src="/socket.io/socket.io.js"></script>
   <title>Alias: lobby</title>
 </head>
 
@@ -30,7 +29,7 @@
   </div>
   <div class="container">
     <h2><span class="badge badge-success">Игроки</span></h2>
-    <table class="table">
+    <table class="table" id="client-table">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -58,14 +57,6 @@
       </tbody>
     </table>
   </div>
-
-  <script>
-    var socket = io('http://localhost');
-    socket.on('news', function (data) {
-      console.log(data);
-      socket.emit('my other event', { my: 'data' });
-    });
-  </script>
 
 </body>
 
