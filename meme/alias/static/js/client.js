@@ -1,36 +1,34 @@
-const {EchoRequest, EchoResponse} = require('./echo_pb.js');
-const {EchoServiceClient} = require('./echo_grpc_web_pb.js');
+import io from "socket.io-client";
 
-var echoService = new EchoServiceClient('http://localhost:8080');
+const socket = io("http://localhost");
+socket.on("connect", connect);
+socket.on("event", event);
+socket.on("disconnect", disconnect);
 
-var request = new EchoRequest();
-request.setMessage('Hello World!');
+function connect() {}
 
-echoService.echo(request, {}, function(err, response) {
-  // ...
-});
+function event(data) {}
+
+function disconnect() {}
 
 window.onload = initialize;
 
 function initialize() {
-    var button = document.getElementById("alias-btn");
-    document.onload = updateTable();
+  var button = document.getElementById("alias-btn");
+  document.onload = updateTable();
 }
 
 function updateTable() {
-    let table = document.getElementById("client-table");
-    deleteRows(table);
-
+  let table = document.getElementById("client-table");
+  deleteRows(table);
 }
 
 function deleteRows(table) {
-    let n = table.getElementsByTagName("tr").length;
-    while (n != 0) {
-        table.deleteRow(0);
-        n = table.getElementsByTagName("tr").length;
-    }
+  let n = table.getElementsByTagName("tr").length;
+  while (n != 0) {
+    table.deleteRow(0);
+    n = table.getElementsByTagName("tr").length;
+  }
 }
 
-function getUsers() {
-
-}
+function getUsers() {}

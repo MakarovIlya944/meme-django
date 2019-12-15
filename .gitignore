@@ -3,5 +3,5 @@ venv/**
 meme/**/__pycache__/**
 meme/memer/migration/**
 meme/*.sqlite3
-node_modules/**
+live-server/node_modules/**
 *.sql
