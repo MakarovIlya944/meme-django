@@ -4,8 +4,7 @@
   "description": "Server for users live shiwing on frontend",
   "main": "server.js",
   "dependencies": {
-    "socket.io": "^2.3.0",
-    "sqlite3": "^4.1.1"
+    "socket.io": "^2.3.0"
   },
   "devDependencies": {},
   "scripts": {
@@ -14,8 +13,7 @@
   },
   "keywords": [
     "socketio",
-    "lobby",
-    "sqlite3"
+    "lobby"
   ],
   "author": "MakarovIlya944",
   "license": "ISC"

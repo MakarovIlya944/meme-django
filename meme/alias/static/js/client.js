@@ -1,13 +1,15 @@
 import io from "socket.io-client";
 
-const socket = io("http://localhost");
+const socket = io("http://localhost:3000");
 socket.on("connect", connect);
 socket.on("event", event);
 socket.on("disconnect", disconnect);
 
 function connect() {}
 
-function event(data) {}
+function event(data) {
+  updateTable();
+}
 
 function disconnect() {}
 
@@ -30,5 +32,3 @@ function deleteRows(table) {
     n = table.getElementsByTagName("tr").length;
   }
 }
-
-function getUsers() {}

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
-
+from default.sync import syncLogout, syncLogin
 
 def index(request):
     return render(request, "default/index.html")
@@ -22,6 +22,7 @@ def signup(request):
             user = User.objects.create_user(uservalue, password=passwordvalue)
             user.save()
             login(request, user)
+            syncLogin(uservalue)
             context = {'form': form}
             return redirect('/')
             # return render(request, 'default/index.html', context)
@@ -39,6 +40,7 @@ def signin(request):
         user = authenticate(username=uservalue, password=passwordvalue)
         if user is not None:
             login(request, user)
+            syncLogin(uservalue)
             context = {'form': form}
             return redirect('/')
         else:

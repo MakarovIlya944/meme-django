@@ -1,5 +1,6 @@
-.vscode/**
-venv/**
+meme/.vscode/**
+live-server/.vscode/**
+meme/venv/**
 meme/**/__pycache__/**
 meme/memer/migration/**
 meme/*.sqlite3
