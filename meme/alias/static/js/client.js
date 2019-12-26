@@ -1,5 +1,6 @@
-import io from "socket.io-client";
 
+// import io from "socket.io.js";
+const io = require("socket.io-client");
 const socket = io("http://localhost:3000");
 socket.on("connect", connect);
 socket.on("event", event);
@@ -8,7 +9,7 @@ socket.on("disconnect", disconnect);
 function connect() {}
 
 function event(data) {
-  updateTable();
+  updateTable(data);
 }
 
 function disconnect() {}
@@ -20,7 +21,7 @@ function initialize() {
   document.onload = updateTable();
 }
 
-function updateTable() {
+function updateTable(data) {
   let table = document.getElementById("client-table");
   deleteRows(table);
 }

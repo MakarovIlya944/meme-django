@@ -10,13 +10,15 @@ const server_django = new http.Server(function (req, res) {
     userdata += data;
   });
   req.on('end', () => {
-    var result = "";
-    for (var i = 0; i < userdata.length; i++) {
-      result += String.fromCharCode(parseInt(userdata[i], 2));
+    // var result = userdata.split('&').map((p,i,r)=> { let x = p.split("=")[0]; { x:p.split("=")[1] }});
+    const data = userdata.split('&');
+    var result = {};
+    for (let i=0;i<data.length;i++) {
+      kv = data[i].split('=');
+      result[kv[0]] = kv[1];
     }
-
     updateUsers(result);
-    userdata = {};
+    userdata = '';
   });
 });
 server_django.listen(3030);
@@ -36,8 +38,7 @@ function event(data) {
 }
 
 function updateUsers(data) {
-  return '';
-  const user = users.find((e, i, a) => { e.username === data.username });
+  let user = users.find((e, i, a) => { e.username === data.username });
   if (user) {
     if (data.action === 'login') {
       user['login_time'] = data.time;
@@ -56,9 +57,9 @@ function updateUsers(data) {
       'login_time': ''
     }
     if (data.action === 'logout')
-      user['logout_time'] = date.time;
+      user['logout_time'] = data.time;
     else if (data.action === 'login')
-      user['login_time'] = date.time;
+      user['login_time'] = data.time;
     users.push(user);
   }
 

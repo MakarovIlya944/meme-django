@@ -11,8 +11,8 @@ def signup(request):
 
     uservalue = request.POST.get('username')
     passwordvalue = request.POST.get('password')
-    form = {'user': uservalue, 'pass': passwordvalue}
     if uservalue and passwordvalue:
+        form = {'user': uservalue, 'pass': passwordvalue}
         try:
             user = User.objects.get(username=uservalue)
             context = {
@@ -27,7 +27,8 @@ def signup(request):
             return redirect('/')
             # return render(request, 'default/index.html', context)
     else:
-        context = {'form': form}
+        #TODO fix GET request
+        context = {'form': {'user': 'PFgjkyb', 'pass': 'asdasd'}}
         return render(request, 'default/signup.html', context)
 
 
@@ -35,8 +36,9 @@ def signin(request):
 
     uservalue = request.POST.get('username')
     passwordvalue = request.POST.get('password')
-    form = {'user': uservalue, 'pass': passwordvalue}
+    form = {}
     if uservalue and passwordvalue:
+        form = {'user': uservalue, 'pass': passwordvalue}
         user = authenticate(username=uservalue, password=passwordvalue)
         if user is not None:
             login(request, user)
@@ -48,5 +50,6 @@ def signin(request):
                        'error': 'The username and password combination is incorrect'}
             return render(request, 'default/signin.html', context)
     else:
-        context = {'form': form}
+        #TODO fix GET request
+        context = {'form': {'user': 'PFgjkyb', 'pass': 'asdasd'}}
         return render(request, 'default/signin.html', context)

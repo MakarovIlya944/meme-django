@@ -14,11 +14,9 @@ def syncLogin(username):
         'Content-Type': 'application/json'
     },
     data={
-        'json_payload': json.dumps({
         'action': 'login',
-        'username': 'username',
+        'username': username,
         'time':time.strftime("%Y-%m-%d-%H.%M.%S")
-            })
         })
     if not r.ok:
         __error(r)
@@ -30,8 +28,8 @@ def syncLogout(username):
         'Content-Type': 'application/json'
     },
     data={
-        'action': 'logout',
-        'username':username,
+        'action': 'login',
+        'username': username,
         'time':time.strftime("%Y-%m-%d-%H.%M.%S")
         })
     if not r.ok:
