@@ -1,64 +1,70 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
-
 <head>
-  {% load static %}
-  <script src="{% static "js/dist/bundle.js" %}"></script>
-  {% load bootstrap4 %}
-  <script url="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
-  {% bootstrap_javascript %}
-  {% bootstrap_css %}
-  <meta charset="utf-8" />
-  <title>Alias: lobby</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Alias_bsdesign</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.3.1/litera/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
+    <link rel="stylesheet" href="{% static "css/Features-Boxed.css" %}">
+    <link rel="stylesheet" href="{% static "css/Highlight-Blue.css" %}">
+    <link rel="stylesheet" href="{% static "css/Simple-Slider.css" %}">
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
+    <script src="{% static "js/settings.js" %}"></script>
+    <script src="{% static "js/Simple-Slider.js" %}"></script>
 </head>
 
 <body>
-  <div class="container justify-content-center">
-    <h2><span class="badge badge-warning">Настройки</span></h2>
-    <form>
-      <div class="form-group">
-        <label for="exampleFormControlSelect1">Словарь</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-          <!-- tamplate -->
-          <option>Простые</option>
-          <option>Сложные</option>
-          <option>Обычные</option>
-        </select>
-      </div>
-    </form>
-  </div>
-  <button type="button" id="alias-refresh" class="btn btn-dark">Обновить</button>
-  <div class="container">
-    <h2><span class="badge badge-success">Игроки</span></h2>
-    <table class="table" id="client-table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Имя</th>
-          <th scope="col">Статус</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- tamplate -->
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>@twitter</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
+    <div class="features-boxed">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">Alias</h2>
+                <p class="text-center">Разделителись на команды, выберите словарь и погнали</p>
+            </div>
+            <div class="row justify-content-center features">
+                <div class="col-sm-6 col-md-5 col-lg-4 item">
+                    <div class="box"><i class="fa fa-book icon"></i>
+                        <h3 class="name">Словарь</h3>
+                        <p class="description">Описание текущего словаря</p><select class="custom-select custom-select-sm" value="Выберите" name="dictionary"><optgroup label="Простые"><option value="12" selected="">Животные</option><option value="13">Еда</option><option value="14">Обычные</option></optgroup></select></div>
+                </div>
+                <div class="col-sm-6 col-md-5 col-lg-4 item">
+                    <div class="box"><i class="fa fa-clock-o icon"></i>
+                        <h3 class="name">Время раунда</h3>
+                        <p class="description">Сколько секунд длится один раунд</p><input class="custom-range" type="range" id="round-range" name="round-time" value="10" min="10" max="60" step="5"></div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div>
+                <form style="filter: blur(0px) contrast(100%);"><label>Название команды</label><input class="border-primary form-control" type="text" minlength="3" maxlength="10" pattern="[\w\d]+" required=""><button class="btn btn-primary btn-block btn-sm d-sm-flex" type="button">Создать команду</button></form>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Имя</th>
+                            <th>Команда</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cell 1</td>
+                            <td>Cell 2</td>
+                        </tr>
+                        <tr>
+                            <td>Cell 3</td>
+                            <td>Cell 4</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
