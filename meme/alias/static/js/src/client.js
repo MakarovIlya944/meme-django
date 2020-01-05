@@ -1,10 +1,16 @@
 import io from "./socket.io.js";
-const socket = io("http://localhost:3000");
+const socket = io("http://localhost:5000", { transport : ['websocket'] });
 socket.on("connect", connect);
 socket.on("event", event);
+socket.on("updateTeams", updateTeams);
 
 function connect() {
   console.log('Hello');
+}
+
+function updateTeams(data) {
+  console.log('updateTeams');
+  updateTable(data);
 }
 
 function event(data) {
@@ -15,8 +21,7 @@ function event(data) {
 window.onload = initialize;
 
 function initialize() {
-  var button = document.getElementById("alias-refresh");
-  button.onclick = refresh;
+  socket.emit("connect")
 }
 
 function refresh() {
@@ -32,13 +37,21 @@ function updateTable(data) {
   deleteRows(table);
   let rows = table.rows;
   console.log(rows);
-  for (let i = 0; i < data.length; i++) {
+
+  for (let key of Object.keys(data)) {
     table.insertRow();
     rows[i].className = "table-dark";
     rows[i].innerHTML = 
-    `<td>${i}</td><td>${data[i].username}</td>`;
-    console.log(table);
-  }
+    `<td>${key}</td><td>${data[key]}</td>`;
+  }  
+
+  // for (let i = 0; i < data.length; i++) {
+  //   table.insertRow();
+  //   rows[i].className = "table-dark";
+  //   rows[i].innerHTML = 
+  //   `<td>${i}</td><td>${data[i].username}</td>`;
+  //   console.log(table);
+  // }
 }
 
 function deleteRows(table) {
@@ -48,3 +61,18 @@ function deleteRows(table) {
     n = table.getElementsByTagName("tr").length;
   }
 }
+
+$(function(){
+
+    // Initializing the swiper plugin for the slider.
+    // Read more here: http://idangero.us/swiper/api/
+    
+    var mySwiper = new Swiper ('.swiper-container', {
+        loop: true,
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev'
+    });
+    
+});

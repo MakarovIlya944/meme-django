@@ -22,7 +22,6 @@ def signup(request):
             user = User.objects.create_user(uservalue, password=passwordvalue)
             user.save()
             login(request, user)
-            syncLogin(uservalue)
             context = {'form': form}
             return redirect('/')
             # return render(request, 'default/index.html', context)
@@ -42,7 +41,6 @@ def signin(request):
         user = authenticate(username=uservalue, password=passwordvalue)
         if user is not None:
             login(request, user)
-            syncLogin(uservalue)
             context = {'form': form}
             return redirect('/')
         else:
