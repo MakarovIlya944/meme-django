@@ -1,6 +1,6 @@
 # Python
 meme/.vscode/**
-meme/venv/**
+**/venv/**
 meme/**/__pycache__/**
 meme/memer/migration/**
 meme/*.sqlite3
