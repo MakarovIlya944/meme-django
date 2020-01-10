@@ -1,12 +1,10 @@
-import io from "./socket.io.js";
-const socket = io("http://localhost:5000", { transport : ['websocket'] });
-socket.on("connect", connect);
-socket.on("event", event);
-socket.on("updateTeams", updateTeams);
-
-function connect() {
+import io from "socket.io-client";
+const socket = io("http://localhost:5000");
+socket.on("connect", _ => {
   console.log('Hello');
-}
+  socket.on("event", event);
+  socket.on("updateTeams", updateTeams);
+});
 
 function updateTeams(data) {
   console.log('updateTeams');

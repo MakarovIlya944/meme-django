@@ -1,77 +1,70 @@
-const http = require("http");
-const server_socket_io = http.createServer();
-const io = require("socket.io")(server_socket_io);
+const server = require("http").createServer();
+const io = require("socket.io")(server);
+const fs = require('fs');
 
-const users = [];
-let clients = [];
-const server_django = new http.Server(function (req, res) {
-  let userdata = '';
-  res.setHeader('Content-Type', 'application/json');
-  req.on('data', (data) => {
-    userdata += data;
-  });
-  req.on('end', () => {
-    // var result = userdata.split('&').map((p,i,r)=> { let x = p.split("=")[0]; { x:p.split("=")[1] }});
-    const data = userdata.split('&');
-    var result = {};
-    for (let i = 0; i < data.length; i++) {
-      kv = data[i].split('=');
-      result[kv[0]] = kv[1];
-    }
-    updateUsers(result);
-    userdata = '';
-  });
-});
-server_django.listen(3030);
+let words = new Set();
+let teams = {};
+let clients = new Set();
+uploadWords(words);
 
 io.on("connection", client => {
-  clients.push(client);
+  clients.add(client);
   console.log("Client connected");
-  client.on("update", update)
-  client.on("disconnect", disconnect);
+  client.on("disconnect", ()=>{disconnect(client);});
+
+  client.on("createTeam", createTeam);
+  client.on("appendTeam", appendTeam);
+  client.on("wordAction", wordAction);
 });
-server_socket_io.listen(3000);
+server.listen(5000);
 
-function disconnect() {
+function disconnect(client) {
   console.log("Client disconnected");
+  clients.delete(client);
 }
 
-function update(data) {
-  console.log("Update")
-  updateUsers(data)
+function emitEvent(name, data) {
+  clients.forEach((c, n, s) => { c.emit(name, data); });
 }
 
-function event(data) {
-  for (let i = 0; i < clients.length; i++)
-    clients[i].emit("event", data);
+function createTeam(data) {
+  console.log(`user ${data["user"]} create ${data["team"]}`);
+  teams[data["user"]] = data["team"];
+  updateTeams();
 }
 
-function updateUsers(data) {
-  if (data) {
-    let user = users.find((e, i, a) => { e.username === data.username });
-    if (user) {
-      if (data.action === 'login') {
-        user['login_time'] = data.time;
-        user.active = true;
-      }
-      else if (data.action === 'logout') {
-        user['logout_time'] = data.time;
-        user.active = false;
-      }
-    }
-    else {
-      user = {
-        'username': data.username,
-        'active': data.action === 'logout',
-        'logout_time': '',
-        'login_time': ''
-      }
-      if (data.action === 'logout')
-        user['logout_time'] = data.time;
-      else if (data.action === 'login')
-        user['login_time'] = data.time;
-      users.push(user);
-    }
-  }
-  event(users);
+function appendTeam(data) {
+  console.log(`user ${data["user"]} append ${data["team"]}`);
+}
+
+function wordAction(word, guess) {
+  console.log(`${word} is ${guess ? "" : "not"} guessed`);
+}
+
+function uploadWords(words) {
+
+  fs.readFile('alias\\words.txt', 'utf8', (err, data) => {
+    if (err) throw err;
+    data.toString().split('\n').forEach((v, i, a) => { words.add(v); });
+  });
+}
+
+function updateTeams() {
+  console.log('teams ', teams);
+  emitEvent('updateTeams', teams);
+}
+
+function tick(sec) {
+  console.log(`time ${sec}s`);
+  emitEvent('tick', sec);
+}
+
+function endRound() {
+  console.log('end round');
+  emitEvent('endRound');
+}
+
+function wordNew(word) {
+  console.log('new word ', word);
+  emitEvent('wordNew', word);
 }

@@ -14,8 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from alias.views import AliasIndex
+from alias.views import AliasSettings
 
 urlpatterns = [
-    path('', AliasIndex.as_view()),
+    path('', AliasSettings.as_view()),
 ]
