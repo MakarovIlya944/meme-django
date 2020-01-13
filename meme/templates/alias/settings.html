@@ -13,7 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
-    <script src="{% static "js/dist/bundle.js" %}"></script>
+    <script src="{% static "js/bundle.js" %}"></script>
 </head>
 
 <body>
@@ -48,16 +48,14 @@
         </div>
         <div class="container">
             <div>
-                <form action="" style="filter: blur(0px) contrast(100%);" method="POST">
-                    {% csrf_token %}
-                    <label>Название команды</label for="id_password_post">
-                    <input class="border-primary form-control" name="team" id="id_password_post" type="text" minlength="3" maxlength="10"
+                    <label id="alias_username">Ну что, user{{ user.username }}. Готов создать команду?</label>
+                        <label>Название команды</label for="alias_new_team">
+                    <input class="border-primary form-control" name="team" id="alias_new_team" type="text" minlength="3" maxlength="10"
                         pattern="[\w\d]+" required="">
-                    <button class="btn btn-primary btn-block btn-sm d-sm-flex" type="submit">Создать команду</button>
-                </form>
+                    <button class="btn btn-primary btn-block btn-sm d-sm-flex" type="button" id="alias_new_team_button">Создать команду</button>
             </div>
             <div class="table-responsive">
-                <table class="table">
+                <table class="table" id="alias_teams">
                     <thead>
                         <tr>
                             <th>Имя</th>

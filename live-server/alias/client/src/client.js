@@ -1,10 +1,11 @@
 import io from "socket.io-client";
 const socket = io("http://localhost:5000");
+
 socket.on("connect", _ => {
-  console.log('Hello');
-  socket.on("event", event);
-  socket.on("updateTeams", updateTeams);
+  console.log(`Client ${socket.id} connected`);
 });
+socket.on("event", event);
+socket.on("updateTeams", updateTeams);
 
 function updateTeams(data) {
   console.log('updateTeams');
@@ -13,43 +14,42 @@ function updateTeams(data) {
 
 function event(data) {
   console.log('event');
-  updateTable(data);
+  // updateTable(data);
 }
 
 window.onload = initialize;
 
 function initialize() {
-  socket.emit("connect")
+  alias_new_team_button.onclick = createTeamPress;
 }
 
-function refresh() {
-  socket.emit("update", {
-    'username': 'test',
-    'action': 'login',
-    'login_time': '12312312eda'
-  });
+function createTeamPress() {
+  let user = alias_username.textContent.split(',')[1].split('.')[0].substr(1);
+  let data = {};
+  data[user] = alias_new_team.value;
+  socket.emit('createTeam', data);
 }
+
+// function refresh() {
+//   socket.emit("update", {
+//     'username': 'test',
+//     'action': 'login',
+//     'login_time': '12312312eda'
+//   });
+// }
 
 function updateTable(data) {
-  let table = document.getElementById("client-table");
+  let table = alias_teams;
   deleteRows(table);
   let rows = table.rows;
-  console.log(rows);
-
-  for (let key of Object.keys(data)) {
+  let i = 0;
+  for (let user of Object.keys(data)) {
     table.insertRow();
+    let name = data[user];
     rows[i].className = "table-dark";
-    rows[i].innerHTML = 
-    `<td>${key}</td><td>${data[key]}</td>`;
-  }  
-
-  // for (let i = 0; i < data.length; i++) {
-  //   table.insertRow();
-  //   rows[i].className = "table-dark";
-  //   rows[i].innerHTML = 
-  //   `<td>${i}</td><td>${data[i].username}</td>`;
-  //   console.log(table);
-  // }
+    rows[i++].innerHTML = 
+    `<td>${user}</td><td>${name}</td>`;
+  };
 }
 
 function deleteRows(table) {

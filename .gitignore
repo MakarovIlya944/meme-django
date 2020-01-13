@@ -9,7 +9,7 @@ meme/*.sqlite3
 live-server/.vscode/**
 **/node_modules/**
 **/package-lock.json
-meme/alias/static/js/dist/**
+meme/alias/static/js/**
 
 # SQL
 *.sql

@@ -1,24 +1,33 @@
 import socketio
 
 sio = socketio.Client()
-isInit = False
+sio.connect('http://localhost:5000')
+
+teams = []
 
 @sio.event
 def connect():
-    print('connection established')
+    print("I'm connected!")
 
-def createTeam(user, team):
-    global sio
-    print(f'user {user} create {team}')
-    sio.emit('createTeam', {'user': user,'team':team})
+@sio.event
+def connect_error():
+    print("The connection failed!")
 
 @sio.event
 def disconnect():
-    print('disconnected from server')
+    print("I'm disconnected!")
 
-def init():
+def createTeam(data):
     global sio
-    global isInit
-    if not isInit:
-        sio.connect('http://localhost:5000')
-        isInit = True
+    teams.append(data)
+    print(f'user {data["user"]} create {data["team"]}')
+    sio.emit('createTeam', data)
+
+@sio.on('createTeamPress')
+def createTeamPress(data):
+    print('createTeamPress')
+    createTeam(data)
+
+@sio.event
+def event(data):
+    print('event')

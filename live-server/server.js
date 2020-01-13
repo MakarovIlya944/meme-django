@@ -4,14 +4,14 @@ const fs = require('fs');
 
 let words = new Set();
 let teams = {};
-let clients = new Set();
+let clients = [];
 uploadWords(words);
 
-io.on("connection", client => {
-  clients.add(client);
-  console.log("Client connected");
-  client.on("disconnect", ()=>{disconnect(client);});
-
+io.on("connection", function (client) {
+  clients.push(client);
+  updateTeams();
+  console.log(`Client ${client.id} connected`);
+  client.on("disconnect", () => { disconnect(client); });
   client.on("createTeam", createTeam);
   client.on("appendTeam", appendTeam);
   client.on("wordAction", wordAction);
@@ -19,17 +19,22 @@ io.on("connection", client => {
 server.listen(5000);
 
 function disconnect(client) {
-  console.log("Client disconnected");
-  clients.delete(client);
+  console.log(`Client ${client} disconnected`);
+  const index = clients.indexOf(client);
+  clients.splice(index, 1);
 }
 
 function emitEvent(name, data) {
-  clients.forEach((c, n, s) => { c.emit(name, data); });
+  clients.forEach(client => {
+    client.emit(name, data);
+  });
 }
 
 function createTeam(data) {
-  console.log(`user ${data["user"]} create ${data["team"]}`);
-  teams[data["user"]] = data["team"];
+  let user = Object.keys(data)[0];
+  let name = data[user];
+  console.log(`user ${user} create ${name}`);
+  teams[user] = name;
   updateTeams();
 }
 
@@ -43,14 +48,14 @@ function wordAction(word, guess) {
 
 function uploadWords(words) {
 
-  fs.readFile('alias\\words.txt', 'utf8', (err, data) => {
+  fs.readFile('alias\\data\\words.txt', 'utf8', (err, data) => {
     if (err) throw err;
     data.toString().split('\n').forEach((v, i, a) => { words.add(v); });
   });
 }
 
 function updateTeams() {
-  console.log('teams ', teams);
+  console.log(`teams ${teams.toString()}`);
   emitEvent('updateTeams', teams);
 }
 
