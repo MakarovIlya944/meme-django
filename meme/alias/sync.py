@@ -1,8 +1,12 @@
 import socketio
-
+from time import sleep
 sio = socketio.Client()
-sio.connect('http://localhost:5000')
-
+while True:
+    try:
+        sio.connect('http://localhost:5000')
+        break
+    except Exception:
+        sleep(1)
 teams = []
 
 @sio.event
