@@ -8,4 +8,5 @@ urlpatterns = [
     path('signup/', DefaultPages.as_view(template='default/signup.html', mode='signup')),
     path('signin/', DefaultPages.as_view(template='default/signin.html')),
     path(r'alias/', include('alias.urls')),
+    path(r'hookah/', include('hookah.urls')),
 ]

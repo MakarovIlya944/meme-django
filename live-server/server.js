@@ -19,7 +19,7 @@ io.on("connection", function (client) {
 server.listen(5000);
 
 function disconnect(client) {
-  console.log(`Client ${client} disconnected`);
+  console.log(`Client ${client.id} disconnected`);
   const index = clients.indexOf(client);
   clients.splice(index, 1);
 }

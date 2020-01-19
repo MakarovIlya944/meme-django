@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap4',
     'alias',
+    'default',
+    'hookah'
 ]
 
 MIDDLEWARE = [
@@ -125,4 +127,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR
 STATICFILES_DIRS = [
     "alias",
+    "default",
+    "hookah",
 ]
