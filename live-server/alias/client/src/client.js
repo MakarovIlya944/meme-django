@@ -4,17 +4,11 @@ const socket = io("http://localhost:5000");
 socket.on("connect", _ => {
   console.log(`Client ${socket.id} connected`);
 });
-socket.on("event", event);
 socket.on("updateTeams", updateTeams);
 
 function updateTeams(data) {
   console.log('updateTeams');
   updateTable(data);
-}
-
-function event(data) {
-  console.log('event');
-  // updateTable(data);
 }
 
 window.onload = initialize;
@@ -24,19 +18,21 @@ function initialize() {
 }
 
 function createTeamPress() {
-  let user = alias_username.textContent.split(',')[1].split('.')[0].substr(1);
+  let user = alias_username.textContent.split(',')[1].substr(1);
   let data = {};
   data[user] = alias_new_team.value;
   socket.emit('createTeam', data);
 }
 
-// function refresh() {
-//   socket.emit("update", {
-//     'username': 'test',
-//     'action': 'login',
-//     'login_time': '12312312eda'
-//   });
-// }
+function join(team) {
+  let user = alias_username.textContent.split(',')[1].substr(1);
+  let data = {'user':user,'team':team};
+  socket.emit('joinTeam', data);
+}
+
+function updateTime() {
+  round_time.text = `${round_range.value} сек`
+}
 
 function updateTable(data) {
   let table = alias_teams;
@@ -48,8 +44,10 @@ function updateTable(data) {
     let name = data[user];
     rows[i].className = "table-dark";
     rows[i++].innerHTML = 
-    `<td>${user}</td><td>${name}</td>`;
+    `<td>${user}</td><td>${name}</td><td><button class="btn btn-info" type="button" id="button_${user}"><i class="fa fa-plus d-xl-flex justify-content-xl-center align-items-xl-center" style="font-size: 40px;"></i></button></td>`;
+    document.getElementById(`button_${user}`).onclick = () => {join(name)};
   };
+  table.tHead.innerHTML = "<th>Имя</th><th>Команда</th><th></th>"
 }
 
 function deleteRows(table) {
@@ -59,18 +57,3 @@ function deleteRows(table) {
     n = table.getElementsByTagName("tr").length;
   }
 }
-
-$(function(){
-
-    // Initializing the swiper plugin for the slider.
-    // Read more here: http://idangero.us/swiper/api/
-    
-    var mySwiper = new Swiper ('.swiper-container', {
-        loop: true,
-        pagination: '.swiper-pagination',
-        paginationClickable: true,
-        nextButton: '.swiper-button-next',
-        prevButton: '.swiper-button-prev'
-    });
-    
-});

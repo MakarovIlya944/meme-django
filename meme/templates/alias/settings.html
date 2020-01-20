@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Alias_bsdesign</title>
     {% load static %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.3.1/litera/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "fonts/font-awesome.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/Features-Boxed.css" %}">
+    <link rel="stylesheet" href="{% static "css/Highlight-Blue.css" %}">
+    <link rel="stylesheet" href="{% static "css/Simple-Slider.css" %}">
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
-    <link rel="stylesheet" href="{% static "css/styles.min.css" %}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
-    <script src="{% static "js/bundle.js" %}"></script>
 </head>
 
 <body>
@@ -27,55 +26,52 @@
                 <div class="col-sm-6 col-md-5 col-lg-4 item">
                     <div class="box"><i class="fa fa-book icon"></i>
                         <h3 class="name">Словарь</h3>
-                        <p class="description">Описание текущего словаря</p><select
-                            class="custom-select custom-select-sm" value="Выберите" name="dictionary">
-                            <optgroup label="Простые">
-                                <option value="12" selected="">Животные</option>
-                                <option value="13">Еда</option>
-                                <option value="14">Обычные</option>
-                            </optgroup>
-                        </select>
-                    </div>
+                        <p class="description">Описание текущего словаря</p><select class="custom-select custom-select-sm" value="Выберите" name="dictionary"><optgroup label="Простые"><option value="12" selected="">Животные</option><option value="13">Еда</option><option value="14">Обычные</option></optgroup></select></div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item">
                     <div class="box"><i class="fa fa-clock-o icon"></i>
                         <h3 class="name">Время раунда</h3>
-                        <p class="description">Сколько секунд длится один раунд</p><input class="custom-range"
-                            type="range" id="round-range" name="round-time" value="10" min="10" max="60" step="5">
-                    </div>
+                        <p class="description">Сколько секунд длится один раунд</p><input class="custom-range" type="range" id="round_range" name="round-time" value="10" min="10" max="60" step="5"><label id="round_time">10 сек</label></div>
                 </div>
             </div>
         </div>
         <div class="container">
             <div>
-                    <label id="alias_username">Ну что, user{{ user.username }}. Готов создать команду?</label>
-                        <label>Название команды</label for="alias_new_team">
-                    <input class="border-primary form-control" name="team" id="alias_new_team" type="text" minlength="3" maxlength="10"
-                        pattern="[\w\d]+" required="">
-                    <button class="btn btn-primary btn-block btn-sm d-sm-flex" type="button" id="alias_new_team_button">Создать команду</button>
+                <form method="POST" action=""><label id="alias_username" for="alias_new_team">Ну что, {{user.username}}, создашь команду?</label><input class="border-primary form-control" type="text" id="alias_new_team" minlength="3" maxlength="10" pattern="[\w\d]+" required="">
+                    <button
+                        class="btn btn-primary btn-block btn-sm d-sm-flex" type="submit">Создать команду</button>
+                </form>
             </div>
             <div class="table-responsive">
-                <table class="table" id="alias_teams">
+                <table class="table">
                     <thead>
                         <tr>
                             <th>Имя</th>
                             <th>Команда</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Cell 1</td>
-                            <td>Cell 2</td>
+                            <td>Text</td>
+                            <td><button class="btn btn-info" type="button"><i class="fa fa-plus d-xl-flex justify-content-xl-center align-items-xl-center" style="font-size: 40px;"></i></button></td>
                         </tr>
                         <tr>
+                            <td>Cell 2</td>
                             <td>Cell 3</td>
-                            <td>Cell 4</td>
+                            <td><button class="btn btn-info" type="button"><i class="fa fa-plus d-xl-flex justify-content-xl-center align-items-xl-center" style="font-size: 40px;"></i></button></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+    <script src="{% static "js/jquery.min.js" %}"></script>
+    <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+    <script src="{% static "js/bundle.js" %}"></script>
+    <script src="{% static "js/Simple-Slider.js" %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
 </body>
 
 </html>

@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap4',
     'alias',
-    'default'
 ]
 
 MIDDLEWARE = [
@@ -125,5 +124,4 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR
 STATICFILES_DIRS = [
     "alias",
-    "default",
 ]

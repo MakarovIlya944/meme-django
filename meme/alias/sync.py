@@ -1,12 +1,23 @@
 import socketio
 from time import sleep
 sio = socketio.Client()
-while True:
-    try:
-        sio.connect('http://localhost:5000')
-        break
-    except Exception:
-        sleep(1)
+isInit = False
+
+def clientInit(url):
+    global isInit
+    if isInit:
+        return
+    n = 5
+    for i in range(n):
+        try:
+            sio.connect(url)
+            isInit = True
+            break
+        except Exception:
+            print('Socker Server not found!\nSleeping...')
+            sleep(1)
+    else:
+        raise ConnectionError('Socket Server not found!')
 teams = []
 
 @sio.event

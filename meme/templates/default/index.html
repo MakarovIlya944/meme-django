@@ -3,7 +3,6 @@
 
 <head>
     {% load static %}
-    <script src="{% static "js/default.js" %}"></script>
     {% load bootstrap4 %}
     <!-- <script src="{% bootstrap_jquery_url %}"></script> -->
     {% bootstrap_javascript %}
@@ -29,7 +28,11 @@
             <div class="col-4">
                 <div class="btn-group-vertical" role="group" aria-label="aria">
                     {% if user.is_authenticated %}
-                    <a href="/signin" class="btn btn-primary btn-sm" role="button">Выйти</a>
+                    <form method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-primary btn-sm" type="submit">Выйти</button>
+                        <input type="hidden" name="exit" value="exit" />
+                    </form>
                     {% else %}
                     <a href="/signin" class="btn btn-primary btn-sm" role="button">Войти</a>
                     <a href="/signup" class="btn btn-primary btn-sm" role="button">Зарегистрироваться</a>

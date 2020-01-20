@@ -13,7 +13,7 @@ io.on("connection", function (client) {
   console.log(`Client ${client.id} connected`);
   client.on("disconnect", () => { disconnect(client); });
   client.on("createTeam", createTeam);
-  client.on("appendTeam", appendTeam);
+  client.on("joinTeam", joinTeam);
   client.on("wordAction", wordAction);
 });
 server.listen(5000);
@@ -38,7 +38,7 @@ function createTeam(data) {
   updateTeams();
 }
 
-function appendTeam(data) {
+function joinTeam(data) {
   console.log(`user ${data["user"]} append ${data["team"]}`);
 }
 

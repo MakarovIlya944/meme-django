@@ -1,10 +1,9 @@
 from django.template.response import TemplateResponse
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
 from django.views import View
-from alias.sync import createTeam
+from alias.sync import clientInit
 
 class AliasSettings(View):
 
     def get(self, request, *args, **kwargs):
+        clientInit('http://localhost:5000')
         return TemplateResponse(request, "alias/settings.html")

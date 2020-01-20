@@ -1,11 +1,21 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
-from default.sync import syncLogout, syncLogin
+from django.contrib.auth import authenticate, login, logout
+from django.template.response import TemplateResponse
+from django.views import View
 
-def index(request):
-    return render(request, "default/index.html")
+class DefaultPages(View):
 
+    template = "default/index.html"
+
+    def get(self, request, *args, **kwargs):
+        return TemplateResponse(request, self.template)
+
+    def post(self, request, *args, **kwargs):
+        if request.POST.get('exit'):
+            logout(request)
+            return TemplateResponse(request, "default/index.html")
+        return TemplateResponse(request, self.template)
 
 def signup(request):
 

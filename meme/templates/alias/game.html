@@ -6,23 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Alias_bsdesign</title>
     {% load static %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.3.1/litera/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{% static "css/styles.min.css" %}">
+    <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "fonts/font-awesome.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/Features-Boxed.css" %}">
+    <link rel="stylesheet" href="{% static "css/Highlight-Blue.css" %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
+    <link rel="stylesheet" href="{% static "css/Simple-Slider.css" %}">
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
 </head>
 
-<body class="text-center">
-    <div class="row text-center">
-        <div class="col"><small>Для начала нажмите старт</small></div>
-    </div>
-    <div class="row">
-        <div class="col"><button class="btn btn-success" type="button">Button</button></div>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
+<body><div>
+        <div class="row">
+            <div class="col-md-4"><button class="btn btn-success" type="button">Отгадано</button></div>
+            <div class="col-md-4"><small>Очередное слов</small></div>
+            <div class="col-md-4"><button class="btn btn-danger" type="button">Не отгадано</button></div>
+        </div>
+</div>
+    <script src="{% static "js/jquery.min.js" %}"></script>
+    <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
     <script src="{% static "js/bundle.js" %}"></script>
+    <script src="{% static "js/Simple-Slider.js" %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
 </body>
 
 </html>
