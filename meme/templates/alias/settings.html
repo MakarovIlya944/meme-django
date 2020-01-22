@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="{% static "css/Simple-Slider.css" %}">
     <link rel="stylesheet" href="{% static "css/styles.css" %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
+    <link rel="stylesheet" href="{% static "assets/css/Simple-Slider.css" %}">
+    <link rel="stylesheet" href="{% static "assets/css/styles.css" %}">
 </head>
 
 <body>
@@ -36,14 +38,12 @@
             </div>
         </div>
         <div class="container">
-            <div>
-                <form method="POST" action=""><label id="alias_username" for="alias_new_team">Ну что, {{user.username}}, создашь команду?</label><input class="border-primary form-control" type="text" id="alias_new_team" minlength="3" maxlength="10" pattern="[\w\d]+" required="">
-                    <button
-                        class="btn btn-primary btn-block btn-sm d-sm-flex" type="submit">Создать команду</button>
-                </form>
+            <div><label id="alias_username" for="alias_new_team">Ну что, {{ user.username }}, создашь команду?</label><input class="border-primary" type="text" id="alias_new_team" minlength="3" maxlength="10" pattern="[\w\d]+" required="">
+                <button
+                    class="btn btn-primary btn-block btn-sm d-sm-flex" id="alias_new_team_button" type="button">Создать команду</button>
             </div>
             <div class="table-responsive">
-                <table class="table">
+                <table class="table" id="alias_teams">
                     <thead>
                         <tr>
                             <th>Имя</th>

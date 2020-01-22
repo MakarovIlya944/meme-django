@@ -26,7 +26,11 @@
             <button type="submit" name="submit" class="btn btn-primary">Создать</button>
         </div>
     </form>
-
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endif %}
 </body>
 
 </html>
