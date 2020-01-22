@@ -1,18 +1,28 @@
-from django.db import models
 import json
+from django.db import models
+
 
 class Tobacco(models.Model):
 
     TASTES = (
         ('MINT', 'Mint'),
         ('PIN', 'Pin'),
-
     )
 
-    def __readMixes__():
-        with open('mixes.txt','r') as f:
-            data = json.load(f)
+    TobaccoId = models.IntegerField(auto_created=True, primary_key=True)
+    Mark = models.CharField(max_length=32)
+    Taste = models.CharField(max_length=32, choices=TASTES)
 
-    index = models.IntegerField(auto_created=True, primary_key=True)
-    mark = models.CharField(max_length=30)
-    taste = models.CharField(max_length=30, choices=TASTES)
+
+class Recipe(models.Model):
+
+    LIQUIDS = (
+        ('MILK', 'Milk'),
+        ('WATER', 'Water'),
+    )
+
+    RecipeId = models.IntegerField(auto_created=True, primary_key=True)
+    TobaccoList = models.ManyToManyField(Tobacco)
+    Optional = models.ManyToManyField(Tobacco, blank=True)
+    Flask = models.CharField(max_length=32, choices=LIQUIDS)
+    Description = models.TextField(max_length=128)
