@@ -23,6 +23,6 @@ class Recipe(models.Model):
 
     RecipeId = models.IntegerField(auto_created=True, primary_key=True)
     TobaccoList = models.ManyToManyField(Tobacco)
-    Optional = models.ManyToManyField(Tobacco, blank=True)
+    OptionalList = models.ManyToManyField(Tobacco, blank=True)
     Flask = models.CharField(max_length=32, choices=LIQUIDS)
     Description = models.TextField(max_length=128)
