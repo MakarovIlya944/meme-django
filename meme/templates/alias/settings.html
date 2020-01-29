@@ -28,19 +28,31 @@
                 <div class="col-sm-6 col-md-5 col-lg-4 item">
                     <div class="box"><i class="fa fa-book icon"></i>
                         <h3 class="name">Словарь</h3>
-                        <p class="description">Описание текущего словаря</p><select class="custom-select custom-select-sm" value="Выберите" name="dictionary"><optgroup label="Простые"><option value="12" selected="">Животные</option><option value="13">Еда</option><option value="14">Обычные</option></optgroup></select></div>
+                        <p class="description">Описание текущего словаря</p><select
+                            class="custom-select custom-select-sm" value="Выберите" name="dictionary">
+                            <optgroup label="Простые">
+                                <option value="12" selected="">Животные</option>
+                                <option value="13">Еда</option>
+                                <option value="14">Обычные</option>
+                            </optgroup>
+                        </select>
+                    </div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item">
                     <div class="box"><i class="fa fa-clock-o icon"></i>
                         <h3 class="name">Время раунда</h3>
-                        <p class="description">Сколько секунд длится один раунд</p><input class="custom-range" type="range" id="round_range" name="round-time" value="10" min="10" max="60" step="5"><label id="round_time">10 сек</label></div>
+                        <p class="description">Сколько секунд длится один раунд</p><input class="custom-range"
+                            type="range" id="round_range" name="round-time" value="10" min="10" max="60" step="5"><label
+                            id="round_time">10 сек</label>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="container">
-            <div><label id="alias_username" for="alias_new_team">Ну что, {{ user.username }}, создашь команду?</label><input class="border-primary" type="text" id="alias_new_team" minlength="3" maxlength="10" pattern="[\w\d]+" required="">
-                <button
-                    class="btn btn-primary btn-block btn-sm d-sm-flex" id="alias_new_team_button" type="button">Создать команду</button>
+            <div><label id="alias_username" for="alias_new_team">Ну что, {{ user.username }}, создашь
+                    команду?</label><input class="border-primary" type="text" id="alias_new_team" minlength="3"
+                    maxlength="10" pattern="[\w\d]+" required="">
+                <button class="btn btn-primary btn-block btn-sm d-sm-flex" id="alias_new_team_button" type="button">Создать команду</button>
             </div>
             <div class="table-responsive">
                 <table class="table" id="alias_teams">
@@ -55,16 +67,21 @@
                         <tr>
                             <td>Cell 1</td>
                             <td>Text</td>
-                            <td><button class="btn btn-info" type="button"><i class="fa fa-plus d-xl-flex justify-content-xl-center align-items-xl-center" style="font-size: 40px;"></i></button></td>
+                            <td><button class="btn btn-info" type="button"><i
+                                        class="fa fa-plus d-xl-flex justify-content-xl-center align-items-xl-center"
+                                        style="font-size: 40px;"></i></button></td>
                         </tr>
                         <tr>
                             <td>Cell 2</td>
                             <td>Cell 3</td>
-                            <td><button class="btn btn-info" type="button"><i class="fa fa-plus d-xl-flex justify-content-xl-center align-items-xl-center" style="font-size: 40px;"></i></button></td>
+                            <td><button class="btn btn-info" type="button"><i
+                                        class="fa fa-plus d-xl-flex justify-content-xl-center align-items-xl-center"
+                                        style="font-size: 40px;"></i></button></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+            <input type="button" onclick="location.href='/alias/ready';" id="start" value="Поехали" />
         </div>
     </div>
     <script src="{% static "js/jquery.min.js" %}"></script>

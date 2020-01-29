@@ -18,4 +18,6 @@ from alias.views import AliasSettings
 
 urlpatterns = [
     path('', AliasSettings.as_view()),
+    path('ready/', AliasSettings.as_view(template="alias/ready.html")),
+    path('game/', AliasSettings.as_view(template="alias/game.html")),
 ]

@@ -1,8 +1,11 @@
 import io from "socket.io-client";
-const socket = io("http://localhost:5000");
+const socket = io("192.168.1.105:5000");
 
 socket.on("connect", _ => {
   console.log(`Client ${socket.id} connected`);
+});
+socket.on("disconnect", _ => {
+  console.log(`Client ${socket.id} disconnected`);
 });
 socket.on("updateTeams", updateTeams);
 
@@ -26,12 +29,12 @@ function createTeamPress() {
 
 function join(team) {
   let user = alias_username.textContent.split(',')[1].substr(1);
-  let data = {'user':user,'team':team};
+  let data = { 'user': user, 'team': team };
   socket.emit('joinTeam', data);
 }
 
 function updateTime() {
-  round_time.text = `${round_range.value} сек`
+  round_time.text = `${round_range.value} сек`;
 }
 
 function updateTable(data) {
@@ -43,9 +46,9 @@ function updateTable(data) {
     table.insertRow();
     let name = data[user];
     rows[i].className = "table-dark";
-    rows[i++].innerHTML = 
-    `<td>${user}</td><td>${name}</td><td><button class="btn btn-info" type="button" id="button_${user}"><i class="fa fa-plus d-xl-flex justify-content-xl-center align-items-xl-center" style="font-size: 40px;"></i></button></td>`;
-    document.getElementById(`button_${user}`).onclick = () => {join(name)};
+    rows[i++].innerHTML =
+      `<td>${user}</td><td>${name}</td><td><button class="btn btn-info" type="button" id="button_${user}"><i class="fa fa-plus d-xl-flex justify-content-xl-center align-items-xl-center" style="font-size: 40px;"></i></button></td>`;
+    document.getElementById(`button_${user}`).onclick = () => { join(name) };
   };
   table.tHead.innerHTML = "<th>Имя</th><th>Команда</th><th></th>"
 }

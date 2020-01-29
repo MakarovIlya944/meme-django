@@ -43,6 +43,9 @@ def createTeamPress(data):
     print('createTeamPress')
     createTeam(data)
 
+def startGame():
+    sio.emit('createTeam')
+
 @sio.event
 def event(data):
     print('event')
