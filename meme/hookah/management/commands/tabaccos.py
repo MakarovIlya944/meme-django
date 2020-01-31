@@ -9,10 +9,13 @@ def __read_mixes(file):
     return data
 
 
-def __get_tobacco(data):
-    if data.get("mark"):
-        return {"mark": data["mark"], "taste": data["mark"]}
-    return {"mark": "any", "taste": data["mark"]}
+def construct_tobacco(data):
+    if type(data) == str:  # t.get('mark'):
+        tobacco = Tobacco(Mark=data)
+    else:
+        tobacco = Tobacco(Mark=data.get('mark'), Taste=data.get('taste'))
+    tobacco.save()
+    return tobacco
 
 
 class Command(BaseCommand):
@@ -23,8 +26,11 @@ class Command(BaseCommand):
         parser.add_argument('file', nargs='+', type=str)
 
     def handle(self, *args, **options):
-        if args[2] == "read":
-            data = __read_mixes(args[2])
+        tobacco = Tobacco(Mark="a", Taste="a")
+        tobacco.save()
+        print(tobacco)
+        if options["mode"] == "read":
+            data = __read_mixes(options["file"])
 
             for r in data:
                 tobac_list = []
@@ -32,14 +38,14 @@ class Command(BaseCommand):
                 flask = "water"
                 desc = ""
                 for t in r["recipe"]:
-                    t = __get_tobacco(t)
-                    tobac_list.append(Tobacco(Mark=t["mark"], Taste=t["taste"]))
+                    tobac_list.append(construct_tobacco(t))
+                R = Recipe(tobaccoList=tobac_list)
+                R.Flask = r.get('flask') or flask
+                R.Description = r.get('description') or desc
                 if r.get("optional"):
                     for t in r["optional"]:
-                        t = __get_tobacco(t)
-                        optional_list.append(
-                            Tobacco(Mark=t["mark"], Taste=t["taste"]))
-                Recipe(TobaccoList=tobac_list, OptionalList=optional_list,
-                    Flask=flask, Description=desc)
+                        optional_list.append(construct_tobacco(t))
+                R.OptionalList = optional_list
+                R.save()
 
             self.stdout.write(self.style.SUCCESS(f'Added {len(data)} recipies'))
