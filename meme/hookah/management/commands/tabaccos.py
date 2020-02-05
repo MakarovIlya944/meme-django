@@ -1,21 +1,26 @@
 from django.core.management.base import BaseCommand, CommandError
-from hookah.models import Recipe, Tobacco
+from hookah.models import Recipe, Tabacco
 import json
 
 
-def __read_mixes(file):
+def read_mixes(file):
     with open(file, 'r', encoding="utf-8") as f:
         data = json.load(f)
     return data
 
 
 def construct_tobacco(data):
-    if type(data) == str:  # t.get('mark'):
-        tobacco = Tobacco(Mark=data)
+    if type(data) == str:
+        taste = data
+        mark = None
     else:
-        tobacco = Tobacco(Mark=data.get('mark'), Taste=data.get('taste'))
-    tobacco.save()
-    return tobacco
+        taste = data.get('taste')
+        mark = data.get('mark')
+    try:
+        return Tabacco.objects.get(Taste=taste, Mark=mark)
+    except Exception:
+        Tabacco(Mark=mark, Taste=taste).save()
+    return Tabacco.objects.get(Taste=taste, Mark=mark)
 
 
 class Command(BaseCommand):
@@ -26,26 +31,30 @@ class Command(BaseCommand):
         parser.add_argument('file', nargs='+', type=str)
 
     def handle(self, *args, **options):
-        tobacco = Tobacco(Mark="a", Taste="a")
-        tobacco.save()
-        print(tobacco)
-        if options["mode"] == "read":
-            data = __read_mixes(options["file"])
+        if options["mode"][0] == "read":
+            data = read_mixes(options["file"][0])
 
+            i = 1
             for r in data:
-                tobac_list = []
-                optional_list = []
-                flask = "water"
-                desc = ""
-                for t in r["recipe"]:
-                    tobac_list.append(construct_tobacco(t))
-                R = Recipe(tobaccoList=tobac_list)
-                R.Flask = r.get('flask') or flask
-                R.Description = r.get('description') or desc
-                if r.get("optional"):
-                    for t in r["optional"]:
-                        optional_list.append(construct_tobacco(t))
-                R.OptionalList = optional_list
-                R.save()
+                i += 1
+                try:
+                    tobac_list = []
+                    optional_list = []
+                    flask = "water"
+                    desc = ""
+                    for t in r["recipe"]:
+                        # R.TabaccoList.add(construct_tobacco(t))
+                        tobac_list.append(construct_tobacco(t))
+                    R = Recipe.objects.create(RecipeId=i, Flask=r.get(
+                        'flask') or flask, Description=r.get('description') or desc)
+                    R.TabaccoList.set(tobac_list)
+                    if r.get("optional"):
+                        for t in r["optional"]:
+                            optional_list.append(construct_tobacco(t))
+                    R.OptionalList.set(optional_list)
+                    R.save()
+                except Exception as ex:
+                    print(ex.args)
 
-            self.stdout.write(self.style.SUCCESS(f'Added {len(data)} recipies'))
+            self.stdout.write(self.style.SUCCESS(
+                f'Added {len(data)} recipies'))

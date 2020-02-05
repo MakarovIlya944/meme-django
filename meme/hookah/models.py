@@ -1,13 +1,14 @@
-import json
 from django.db import models
 
 
-class Tobacco(models.Model):
+class Tabacco(models.Model):
 
     TobaccoId = models.IntegerField(auto_created=True, primary_key=True)
-    Mark = models.CharField(max_length=32)
+    Mark = models.CharField(max_length=32,null=True )
     Taste = models.CharField(max_length=32)
 
+    def __str__(self):
+        return f'Taste: {self.Taste} {"Taste: " + self.Mark if self.Mark else ""}' 
 
 class Recipe(models.Model):
 
@@ -19,7 +20,10 @@ class Recipe(models.Model):
     )
     
     RecipeId = models.IntegerField(auto_created=True, primary_key=True)
-    TobaccoList = models.ManyToManyField(Tobacco,related_name="tobacco")
-    OptionalList = models.ManyToManyField(Tobacco, blank=True,related_name="optional")
+    TabaccoList = models.ManyToManyField(Tabacco,related_name="TabaccoList")
+    OptionalList = models.ManyToManyField(Tabacco, blank=True,related_name="OptionalList")
     Flask = models.CharField(max_length=32, choices=LIQUIDS)
     Description = models.TextField(max_length=128)
+
+    def __str__(self):
+        return str(self.RecipeId) + ' ' + ' '.join(self.TabaccoList)

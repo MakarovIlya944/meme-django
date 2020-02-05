@@ -1,5 +1,5 @@
 from django.contrib import admin
-from hookah.models import Tobacco, Recipe
+from hookah.models import Tabacco, Recipe
 
-admin.register(Tobacco)
+admin.register(Tabacco)
 admin.register(Recipe)

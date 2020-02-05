@@ -1,5 +1,6 @@
 from django.views import View
 from django.template.response import TemplateResponse
+from hookah.models import Recipe, Tabacco
 
 # Create your views here.
 
@@ -13,4 +14,5 @@ class HookahIndex(View):
     ]
 
     def get(self, request, *args, **kwargs):
+        a = Recipe.objects.get()
         return TemplateResponse(request, "hookah/index.html", context={'store': self.store})
