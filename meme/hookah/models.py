@@ -4,7 +4,7 @@ from django.db import models
 class Tabacco(models.Model):
 
     TobaccoId = models.IntegerField(auto_created=True, primary_key=True)
-    Mark = models.CharField(max_length=32,null=True )
+    Mark = models.CharField(max_length=32,default='любой' )
     Taste = models.CharField(max_length=32)
     Have = models.BooleanField(default=False)
 

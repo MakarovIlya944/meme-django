@@ -34,7 +34,7 @@
                 {% endfor %}
 
             </div>
-            <div class="swiper-pagination"></div>
+            <!-- <div class="swiper-pagination"></div> -->
             <div class="swiper-button-prev"></div>
             <div class="swiper-button-next"></div>
         </div>
@@ -45,11 +45,11 @@
                 <h2 class="text-center">Табачок</h2>
             </div>
             <div class="row justify-content-center features">
-                {% for element in store %}
+                {% for element in tabaccos %}
                 <div class="col-sm-6 col-md-5 col-lg-4 item">
                     <div class="box"><i class="fa fa-phone icon"></i>
                         <h3 class="name">{{ element.taste }}</h3>
-                        <p class="description">{{ element.mark }}</p><a class="learn-more" href="#">Learn more »</a>
+                        <p class="description">{{ element.mark }}</p>
                     </div>
                 </div>
                 {% endfor %}
