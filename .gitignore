@@ -4,6 +4,7 @@ meme/.vscode/**
 meme/**/__pycache__/**
 meme/memer/migration/**
 meme/*.sqlite3
+**/migrations/**
 
 # JS
 live-server/.vscode/**
