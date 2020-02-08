@@ -15,5 +15,6 @@ class HookahIndex(View):
                     for e in a]
         recepies = sorted(recepies, key=lambda x: -x['value'])
         b = Tabacco.objects.all().filter(Have=True)
-        tabaccos = [{'mark':t.Mark, 'taste':t.Taste} for t in b]
+        tabaccos = [{'mark': t.Mark, 'taste': t.Taste, 'icon': t.Icon, 'mass':t.Mass if t.Mass != 0 else None}
+                    for t in b]
         return TemplateResponse(request, "hookah/index.html", context={'tabaccos': tabaccos, 'recepies': recepies})

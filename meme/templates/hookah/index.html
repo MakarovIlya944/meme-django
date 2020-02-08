@@ -47,12 +47,38 @@
             <div class="row justify-content-center features">
                 {% for element in tabaccos %}
                 <div class="col-sm-6 col-md-5 col-lg-4 item">
-                    <div class="box"><i class="fa fa-phone icon"></i>
+                    <div class="box"><i class="{{ element.icon }} icon"></i>
                         <h3 class="name">{{ element.taste }}</h3>
-                        <p class="description">{{ element.mark }}</p>
+                        <p class="description">{{ element.mark }}{% if element.mass %}
+                            {{ element.mass }}мг
+                            {% endif %}</p>
                     </div>
                 </div>
                 {% endfor %}
+            </div>
+        </div>
+
+        <div class="container">
+            <h3 class="name">Добавить новый</h3>
+            <div class="box" style="padding-left: 100px;padding-right: 100px;">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text">Вкус</span></div><input
+                                type="text" class="form-control" />
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text">Марка</span></div><input
+                                type="text" class="form-control" />
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text">Вес</span></div><input
+                                type="number" class="form-control" />
+                        </div>
+                    </div>
+                    <button type="submit" name="submit" class="btn btn-primary">Добавить</button>
+                </form>
             </div>
         </div>
 
