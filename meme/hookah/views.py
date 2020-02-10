@@ -3,7 +3,7 @@ from django.template.response import TemplateResponse
 from hookah.models import Recipe, Tabacco
 from hookah.management.commands.tabaccos import construct_tobacco
 from django.shortcuts import redirect
-
+from django.http import HttpResponseForbidden
 
 # Create your views here.
 
@@ -14,6 +14,8 @@ class HookahIndex(View):
     recepies = ''
 
     def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return HttpResponseForbidden('<h1>Forbidden</h1>')
         recepies = Recipe.objects.all()
         recepies = [{'tobaccos': [{'taste': str(t),
                                    'have': 'list-group-item-primary' if t.Have else 'list-group-item-danger'} for t in e.TabaccoList.all()],
@@ -26,6 +28,8 @@ class HookahIndex(View):
         return TemplateResponse(request, "hookah/index.html", context={'tabaccos': HookahIndex.tabaccos, 'recepies': HookahIndex.recepies})
 
     def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return HttpResponseForbidden('<h1>Forbidden</h1>')
 
         mass = request.POST.get('mass')
         taste = request.POST.get('taste')
