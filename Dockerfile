@@ -5,6 +5,7 @@ WORKDIR /app
 COPY req.txt .
 RUN pip install -r req.txt
 
+RUN ["python", "manage.py", "makemigrations", "hookah"]
 RUN ["python", "manage.py", "migrate"]
 
 EXPOSE 8000
